@@ -4,12 +4,15 @@ import Title from './components/Title'
 import Modal from './components/Modal'
 
 function App() {
+  const [showModal, setShowModal] = useState(true)
   const [showEvents, setShowEvents] = useState(true);
   const [events, setEvents] = useState([
     { title: "mario's birthday bash", id: 1 },
     { title: "bowser's live stream", id: 2 },
     { title: "race on moo moo farm", id: 3 },
   ]);
+
+  console.log(showModal)
 
   const handleClick = (id) => {
     setEvents((prevEvents) => {
@@ -19,6 +22,10 @@ function App() {
     });
     console.log(id);
   };
+
+  const handleClose = () => {
+    setShowModal(false)
+  }
 
   const subtitle = "All the latest events in Marioland"
 
@@ -46,10 +53,10 @@ function App() {
           </React.Fragment>
         ))}
 
-        <Modal>
+        {showModal && <Modal handleClose={handleClose}>
         <h2>10% Off Coupon Code!!</h2>
         <p>Use the code NINJA10 at the checkout</p>
-        </Modal>
+        </Modal>}
     </div>
   );
 }
