@@ -52,7 +52,7 @@ function App() {
             <button onClick={() => handleClick(event.id)}>Delete Event</button>
           </React.Fragment>
         ))}
-        <br/>
+        <br/><br />
         <button onClick={setShowModal}>Show Modal</button>
 
         {showModal && <Modal handleClose={handleClose}>
