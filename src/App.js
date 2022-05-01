@@ -1,22 +1,22 @@
-import './index.css'
+import "./index.css";
 import "./App.css";
 import React, { useState } from "react";
-import Title from './components/Title'
-import Modal from './components/Modal'
-import EventList from './components/EventList'
-import NewEventForm from './components/NewEventForm';
-
+import Title from "./components/Title";
+import Modal from "./components/Modal";
+import EventList from "./components/EventList";
+import NewEventForm from "./components/NewEventForm";
 
 function App() {
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
   const [showEvents, setShowEvents] = useState(true);
-  const [events, setEvents] = useState([
-    { title: "mario's birthday bash", id: 1 },
-    { title: "bowser's live stream", id: 2 },
-    { title: "race on moo moo farm", id: 3 },
-  ]);
+  const [events, setEvents] = useState([]);
 
-  console.log(showModal)
+  const addEvent = (event) => {
+    setEvents((prevEvents) => {
+      return [...prevEvents, event];
+    });
+    setShowModal(false);
+  };
 
   const handleClick = (id) => {
     setEvents((prevEvents) => {
@@ -27,16 +27,12 @@ function App() {
     console.log(id);
   };
 
-  const handleClose = () => {
-    setShowModal(false)
-  }
-
-  const subtitle = "All the latest events in Marioland"
+  const subtitle = "All the latest events in Marioland";
 
   return (
     <div className="App">
       <Title title="Events in Your Area" subtitle={subtitle} />
-      
+
       {showEvents && (
         <div>
           <button onClick={() => setShowEvents(false)}>hide events</button>
@@ -47,16 +43,17 @@ function App() {
           <button onClick={() => setShowEvents(true)}>show events</button>
         </div>
       )}
-      {showEvents &&
-        <EventList events={ events } handleClick={ handleClick } />}
+      {showEvents && <EventList events={events} handleClick={handleClick} />}
 
-        {showModal && <Modal handleClose={handleClose} isSalesModal={ true }>
-        <NewEventForm />
-        </Modal>}
+      {showModal && (
+        <Modal isSalesModal={true}>
+          <NewEventForm addEvent={addEvent} />
+        </Modal>
+      )}
 
-        <div>
-          <button onClick={() => setShowModal(true)}>Add New Event</button>
-        </div>
+      <div>
+        <button onClick={() => setShowModal(true)}>Add New Event</button>
+      </div>
     </div>
   );
 }
