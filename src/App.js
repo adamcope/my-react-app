@@ -24,7 +24,6 @@ function App() {
         return id !== event.id;
       });
     });
-    console.log(id);
   };
 
   const subtitle = "All the latest events in Marioland";
