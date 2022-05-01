@@ -10,5 +10,5 @@ export default function EventList({ events, handleClick }) {
               return handleClick(event.id);
           }}>Delete Event</button>
     </div>
-  ));
+  )); 
 }
